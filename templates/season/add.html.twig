@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% embed 'views/form/template-form.html.twig'  with { form : seasonForm } %}
+        {% block formTitle %} Update a season {% endblock %}
+        {% block buttonLabel %} Update {% endblock %}
+    {% endembed %}
+{% endblock %}
