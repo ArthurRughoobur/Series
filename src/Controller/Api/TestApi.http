@@ -1,5 +1,22 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=PhpStorm
+### Delete Serie
+DELETE http://localhost:8081/series/public/api/series/26
+###
+
+###Create Serie
+POST http://localhost:8081/series/public/api/series
+Content-Type: application/json
+
+{
+    "name": "La série de Michel",
+    "genres": "Western",
+    "status": "Returning",
+    "vote": 8,
+    "popularity": 500,
+    "firstAirDate": "2026-03-01",
+    "lastAirDate": "2026-03-31",
+    "backdrop": "backdrop.png",
+    "poster": "poster.png",
+    "tmdbId": 123456
+}
 
 ###
