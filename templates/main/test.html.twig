@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Test !</h1>
+
+    {% set name ='Michel' %}
+    <h2> {{ name }}</h2>
+
+    {% set colors = ['red','yellow','purple','blue'] %}
+    {% for color in colors %}
+        {% if loop.first %}
+            <p>Première couleur</p>
+        {% elseif loop.last %}
+            <p>Dernière couleur</p>
+        {% endif %}
+        <p style="background-color: {{ color }} ">{{ color }}</p>
+        <div>Index de l'élément : {{ loop.index }}</div>
+        <div>Index de l'élément à partir de 0 : {{ loop.index0 }}</div>
+
+    {% endfor %}
+
+    {# Utilisations d'objet #}
+    {% set user = {name: 'Michel', age: 98} %}
+    <p>{{ user.name }}</p>
+    <p>{{ user.age }}</p>
+
+    {# filtres #}
+    <H2>Quelques filtres</H2>
+    <div>{{ name | upper }}, Taille du nom : {{ name | length }}</div>
+    <div> Taille du tableau : {{ colors |length }} couleurs</div>
+    <div>Date du jour: {{ 'now' | date('d/m/Y') }}</div>
+
+    <h3> Série ! </h3>
+    <div> {{ x.name }}</div>
+    <div> {{ x.author }}</div>
+    <div> Nombres d'épisodes : {{ x.nbEpisode }}</div>
+    <div> Date du serveur : {{ date | date('d/m/Y H:i') }}</div>
+
+    <H3>XSS</H3>
+    <div>{{ username }}</div>
+{#    Désactive la protection#}
+    <div>{{ username | raw }}</div>
+{#    Vire complétement les balises#}
+    <div>{{ username | striptags}}</div>
+
+
+{% endblock %}

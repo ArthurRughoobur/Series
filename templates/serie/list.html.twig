@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>List of TV-SHOW</h2>
+    <div class="flex-div flex-between">
+        {% if currentPage > 1 %}
+            <a class="link-button" href="{{ path('series_list', {'page': currentPage - 1}) }}">Previous page</a>
+        {% else %}
+            <div></div>
+        {% endif %}
+        {% if currentPage < maxPage %}
+            <a class="link-button" href="{{ path('series_list', {'page': currentPage + 1}) }}">Next page</a>
+        {% endif %}
+    </div>
+    <section class="series-list">
+        {% for serie in series %}
+            <article>
+                <a href="{{ path('series_show', {'id': serie.id }) }}">
+                    <img src="{{ asset('images/posters/series/' ~ serie.poster) }}" alt="{{ serie.name }}" title="{{ serie.seasons | length }} seasons">
+                </a>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}

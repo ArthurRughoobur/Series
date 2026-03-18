@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Détail of a TV-SHOW</h2>
+
+    <div class="serie-details">
+        <div>
+            <img src="{{ asset('images/posters/series/' ~ serie.poster) }}" alt="{{ serie.name }}">
+        </div>
+        <div class="serie-details-infos">
+            <a class="link-button" href="{{ path('series_update', {'id': serie.id}) }}">Update</a>
+            <a onclick="return confirm('Suppression de {{ serie.name }} ?')" class="link-button"
+               href="{{ path('series_delete', {'id': serie.id}) }}">Delete</a>
+            <a class="link-button" href="{{ path('season_add_by_serie', {'id': serie.id}) }}">Add a season</a>
+            <h2>{{ serie.name }}</h2>
+            <div>User ratings : {{ serie.vote }}</div>
+            <div>Categorized in {{ serie.genres }}</div>
+            <div>Status : {{ serie.status }}</div>
+            <div>Aired from {{ serie.firstAirDate | date('Y/m/d') }} to {{ serie.lastAirDate | date('Y/m/d') }}</div>
+            <div>{{ serie.overview | nl2br }}</div>
+        </div>
+    </div>
+    <div class="seasons">
+        <h3>Seasons !</h3>
+        {% for season in serie.seasons %}
+            <article>
+                <img src="{{ asset('images/posters/seasons/' ~ season.poster) }}"
+                     alt="{{ serie.name }} | #{{ season.number }}">
+                <div>
+                    <div><a class="link-button" href="{{ path('season_delete', {'id': season.id}) }}">Delete</a></div>
+                    <h4>#{{ season.number }}</h4>
+                    <div>{{ season.firstAirDate | date ("d/m/Y") }}</div>
+                    <div>{{ season.overview | nl2br }}</div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block extraStyles %}
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+            url("{{ asset('images/backdrops/' ~ serie.backdrop) }}");
+        }
+    </style>
+{% endblock %}
+
